@@ -15,18 +15,18 @@ module.exports = function (app, express) {
   just for talking to Watson and so forth. 
 
 */
-  app.post('/api', [expanderController.expandURL,
-                    newsController.isFakeNews,
-                    watsonController.getTitle,
-                    watsonController.getKeywords,
-                    twitterSearch.getTweetsOnTopic,
-                    googleTrends.getGoogleTrends
-                    ], function(req,res,next){
+
+  var apiArr = [expanderController.expandURL, newsController.isFakeNews, watsonController.getTitle,
+                watsonController.getKeywords, twitterSearch.getTweetsOnTopic, googleTrends.getGoogleTrends];
+
+  app.post('/api', apiArr, function(req, res, next) {
     res.json(res.compoundContent);
   });
-  app.post('/api/ext', newsController.isFakeNews , function(req,res,next){
+
+  app.post('/api/ext', newsController.isFakeNews, function(req, res, next) {
     res.json(res.compoundContent);
   });
+
   app.post('/apitest', watsonController.getTitle);
   app.get('/api/googleTrends', googleTrends.getGoogleTrends);
   app.get('/twitter', twitterSearch.getTweetsOnTopic);
@@ -35,9 +35,9 @@ module.exports = function (app, express) {
 // -----------------
 // Handle routes for watson's emotions and sentiment
 // -----------------
-  app.get('/api/popup', [watsonController.getEmotions,
-                        watsonController.getSentiment
-                        ], function(req, res, next) {
+  var popupArr = [watsonController.getEmotions, watsonController.getSentiment];
+  
+  app.get('/api/popup', popupArr, function(req, res, next) {
     res.json(res.compoundContent);
   });
 
