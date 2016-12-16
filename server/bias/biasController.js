@@ -21,7 +21,9 @@ module.exports = {
         var biasResult = (biasData[domain] === undefined) ? null : [biasData[domain].rating];
 
         var response = {
+
           // 'fullUrl': req.body.url,
+
           'url': domain,
           'status': (biasResult === null) ? '' : 'OK',
           'bias': biasResult
