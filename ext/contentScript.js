@@ -1,8 +1,13 @@
 $(document).ready(function() {
+  var flag = null;
+  // ---------------
+  // Handles creation of popover
+  // ---------------
 
-  // create popover
   var gifUrl = chrome.extension.getURL('contentScriptAssets/spin.gif');
-  $('a').attr('data-toggle', 'popover').popover({
+  $('a').attr('data-toggle', 'popover')
+
+  .popover({
     html: true,
     animation: true,
     container: 'body',
@@ -11,16 +16,22 @@ $(document).ready(function() {
     title: 'Article Quick Stats',
     content: '<img class="gifLoading" src="' + gifUrl + '"/>'
   })
-  // keep popover open while hovering over popover
+
+  // ---------------
+  // Handles popover show
+  // ---------------
+
+  // when the user hovers over a link
   .on('mouseenter', function () {
-    var $context = $(this);
-    var context = this;
-    // check if site is a news site
     var hoverUrl = $(this).attr('href');
     if (hoverUrl[0] === '/') {
-      console.log('hostname', window.location.hostname);
       hoverUrl = window.location.hostname + hoverUrl;
     }
+    flag = hoverUrl;
+    var $context = $(this); // refers to 'a' tag
+    var context = this;
+
+    // check if domain is a news site
     $.ajax({
       url: 'http://localhost:8000/api/bias',
       type: 'POST',
@@ -29,36 +40,48 @@ $(document).ready(function() {
     })
 
     .done(function(json) {
+      // if it's a news site
       if (json.bias.status === 'OK') {
-        // slight delay on popover show
+        // wait one second
         setTimeout(function () {
-          // console.log( $('context:hover').length === 0 );
-          if ( $('context:hover').length === 0 ) {
-            console.log($context.popover('show'));
-            $context.popover('show'); // this isn't working
+          // if user is still hovering over link
+          // console.log('flag: ', flag, 'json.bias.fullUrl: ', json.bias.fullUrl);
+          if (flag === json.bias.fullUrl) {
+            //show the popover
+            $context.popover('show');
+            // hide popover when user stops hovering over popover
             $('.popover').on('mouseleave', function () {
-              console.log('mouseleave');
+              // console.log('mouseleave popover');
               $context.popover('hide');
             });
           }
-        }, 1000);
+        }, 500);
       }
+
+
     })
 
     .fail(function() {
       console.log('post req failure');
     });
 
-  // close popover on mouseleave
+  // ---------------
+  // Handle popover hide
+  // ---------------
+
+  // hide the popover when the user stops hovering over link
   }).on('mouseleave', function () {
+    flag = null;
+    // console.log('mouseleave link');
     var $context = $(this);
-    // delay on popover hide, when not hovering over popover itself
-    setTimeout(function () {
-      if ( !$('.popover:hover').length ) {
-        $context.popover('hide');
-      }
-    }, 200);
+    if ( !$('.popover:hover').length ) {
+      $context.popover('hide');
+    }
   });
+
+  // ---------------
+  // Handles popover content
+  // ---------------
 
   $('a').hover(
     function(e) {
@@ -121,10 +144,10 @@ $(document).ready(function() {
 
         // add sentiment to content
         var sentiment = json.sentiment.docSentiment.type;
-        content += '<p>' + '<span class="popoverTitles">' + 'Sentiment: ' + '</span>' + sentiment +  '</p>';
+        content += '<p>' + '<span class="popoverTitles">' + 'Sentiment: ' + '</span>' + sentiment + '</p>';
 
         // add report card to content
-        content += '<p><a>View Report Card</a><span class="heart"> ♥ </span></p>';
+        content += '<p><a><span>View Report Card</span><span class="heart"> ♥ </span> </a></p>';
         content += '</div>';
 
         // set content to popover

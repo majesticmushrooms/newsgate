@@ -81,5 +81,5 @@ module.exports.data = function(req, res) {
   var randIndex = Math.floor(Math.random() * testData.length);
   setTimeout(function() {
     res.send(testData[randIndex]);
-  }, 1500);
+  }, 3000);
 };
