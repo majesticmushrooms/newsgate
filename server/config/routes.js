@@ -76,6 +76,7 @@ This middlware builds the response object starting with the URL expansion and ta
   app.post('/api/bias', [watsonController.getTitle, biasController.getData], function (req, res, next) {
     res.json(res.compoundContent);
   });
+  app.get('/api/bias', biasController.getAll);
   app.get('/api/twitter', twitterSearch.getTweetsOnTopic);
 
 
