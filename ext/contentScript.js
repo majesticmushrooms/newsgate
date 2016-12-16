@@ -13,7 +13,7 @@ $(document).ready(function() {
   })
   // keep popover open while hovering over popover
   .on('mouseenter', function () {
-    var $context = $('this');
+    var $context = $(this);
     var context = this;
     // check if site is a news site
     var hoverUrl = $(this).attr('href');
