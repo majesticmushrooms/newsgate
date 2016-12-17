@@ -8,7 +8,7 @@ var keywordSchema = new mongoose.Schema({
 var savedLinkSchema = new mongoose.Schema({
   name: String,
   fbID: Number,
-  url: String,
+  url: {type: String, unique: true},
   title: String,
   keywords: [keywordSchema]
 });

@@ -1,3 +1,4 @@
+var url = require('url');
 var SavedLink = require('../models/linkModel.js');
 
 var __filterKeywords = function(keywords) {
@@ -20,23 +21,37 @@ var __filterKeywords = function(keywords) {
 module.exports = {
 
   saveToDB: function(req, res, next) {
+    var parsedUrl = url.parse(req.body.url);
+    var lookupUrl = parsedUrl.host + parsedUrl.pathname;
+
     var filtered = __filterKeywords(res.compoundContent['keywords'].keywords);
     var linkData = {
       name: req.user.displayName,
       fbID: req.user.id,
-      url: req.body.url,
+      url: lookupUrl,
       title: res.compoundContent.title.title,
       keywords: filtered
     };
-    console.log('linkDATA!!!!', linkData);
-    var newLinkSave = new SavedLink(linkData);
-    newLinkSave.save(function(err, data) {
+
+    // if the link doesn't exist for that user, create it
+    SavedLink.findOne({fbID: linkData.fbID, title: linkData.title, url: linkData.url}, function(err, link) {
       if (err) {
-        console.log(err);
+        console.log('err', err);
+      } else if (link === null) {
+        var newLinkSave = new SavedLink(linkData);
+        newLinkSave.save(function(err, data) {
+          if (err) {
+            console.log(err);
+          }
+          res.compoundContent = res.compoundContent || {};
+          res.compoundContent['link'] = linkData;
+          next();
+        });
+        console.log('User saved: ', linkData.url);
+      } else {
+        console.log('link', link);
+        console.log('User already saved this link');
       }
-      res.compoundContent = res.compoundContent || {};
-      res.compoundContent['link'] = linkData;
-      next();
     });
   },
 
@@ -61,7 +76,7 @@ module.exports = {
   },
 
   getLinksTest: function(req, res, next) {
-    SavedLink.find({fbID: '3609663193669'})
+    SavedLink.find({fbID: '360843914285104'})
     .exec(function(err, data) {
       if (err) {
         console.log(err);
