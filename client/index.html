@@ -2,9 +2,12 @@
 <html lang="en" ng-app="newsgate">
   <head>
     <meta charset="utf-8">
-    <title>NewsGate</title>
+    <title>NewsMind</title>
+    <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans|Adamina" rel="stylesheet"> -->
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="styles/styles.css" />
+    <!-- <link rel="stylesheet" href="styles/reportcardstyle.css" /> -->
+    <script src="https://use.fontawesome.com/0db15deffe.js"></script>
     <script src="lib/underscore/underscore.js"></script>
     <script src="lib/jquery/dist/jquery.js"></script>
     <script src="lib/d3/d3.js"></script>
@@ -12,6 +15,7 @@
     <script src="lib/angular/angular.js"></script>
     <script src="lib/angular-route/angular-route.js"></script>
     <script src="lib/ngtweet/dist/ngtweet.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
     <base href="/" />
   </head>
   <body twitter-widget-initialize>
@@ -19,13 +23,9 @@
     <div id="app" ng-controller="MainController">
       <div id="mainContainer" ng-controller="NavController" ng-class="{'vert-center': !isLoaded, 'vert-center-disabled': isLoaded}">
         <div>
-          <div class="centerHeader" ng-class="{'loaded-header-disable': !isLoaded, 'loaded-header': isLoaded}" ng-hide="isLoaded">NewsGate</div>
-        </div>
-        <div>
           <div ng-include="'/app/submit/submit.html'"></div>
         </div>
       </div>
-
       <div ng-view></div>
     </div>
 

@@ -1,61 +1,93 @@
+var url = require('url');
 var SavedLink = require('../models/linkModel.js');
 
-module.exports.getTitle = function(req, res, next) {
-	console.log('request body', req.body.url);
-	var parameters = {
-		url: req.body.url
-	}
-	alchemy_language.title(parameters, function (err, response) {
-	  if (err)
-	    console.log('error:', err);
-	  else
-	    console.log(JSON.stringify(response, null, 2));
-			res.compoundContent = res.compoundContent || {};
-			res.compoundContent['title'] = response;
-			next();
-	})
+var __filterKeywords = function(keywords) {
+  var outputKeywords = [];
+  outputKeywords = keywords.slice(0, 5);
+  outputKeywords = outputKeywords.map(keyword => {
+    var newkeyword = {};
+    newkeyword.relevance = keyword.relevance;
+    newkeyword.text = keyword.text.toLowerCase();
+    var solutations = /\b(m[rs]s*)\b\.*/gi;
+    newkeyword.text = newkeyword.text.replace(solutations, ''); //get rid of mr. and mrs.
+    newkeyword.text = newkeyword.text.trim();
+
+    return newkeyword;
+  });
+  //outputKeywords = keywords.filter(keyword => keyword.relevance > 0.75)
+  return outputKeywords;
 };
 
-module.exports.getKeywords = function(req, res, next) {
-	var parameters = {
-		url: req.body.url
-	}
+module.exports = {
 
-	alchemy_language.keywords(parameters, function (err, response) {
-	  if (err)
-	    console.log('error:', err);
-	  else
-	  	res.compoundContent['keywords'] = response;
-		next();
-	    console.log(JSON.stringify(response, null, 2));
-	})
-}
+  saveToDB: function(req, res, next) {
+    var parsedUrl = url.parse(req.body.url);
+    var lookupUrl = parsedUrl.host + parsedUrl.pathname;
 
-var __filterKeywords = function(keywords) {
-	var outputKeywords = [];
-	outputKeywords = keywords.map(keyword => {
+    var filtered = __filterKeywords(res.compoundContent['keywords'].keywords);
+    var linkData = {
+      name: req.user.displayName,
+      fbID: req.user.id,
+      url: lookupUrl,
+      title: res.compoundContent.title.title,
+      keywords: filtered
+    };
 
-		var newkeyword = keyword.toLowerCase();
-		return newkeyword;
-	})
-	//outputKeywords = keywords.filter(keyword => keyword.relevance > 0.75)
-	outputKeywords = keywords.slice(0,5);
-	return outputKeywords;
-}
+    // if the link doesn't exist for that user, create it
+    SavedLink.findOne({fbID: linkData.fbID, title: linkData.title, url: linkData.url}, function(err, link) {
+      if (err) {
+        console.log('err', err);
+      } else if (link === null) {
+        var newLinkSave = new SavedLink(linkData);
+        newLinkSave.save(function(err, data) {
+          if (err) {
+            console.log(err);
+          }
+          res.compoundContent = res.compoundContent || {};
+          res.compoundContent['link'] = linkData;
+          next();
+        });
+        console.log('User saved: ', linkData.url);
+      } else {
+        console.log('link', link);
+        console.log('User already saved this link');
+      }
+    });
+  },
 
-module.exports.saveToDB = function(req, res, next) {
-	console.log('in save to DB');
+  getLinks: function(req, res, next) {
+    if (req.user.id) {
+      SavedLink.find({fbID: req.user.id})
+      .exec(function(err, data) {
+        if (err) {
+          console.log(err);
+        }
+        if (data) {
+          console.log('found link data', data);
+          res.compoundContent = res.compoundContent || {};
+          res.compoundContent['link'] = data;
+          next();
+        }
+      });
+    } else {
+      //No user id found
+      res.sendStatus(403);
+    }
+  },
 
-	console.log('res body ->>>>>>>>', res.compoundContent)
-	
-	var linkData = {
-		url: req.body.url, 
-		title: res.compoundContent.title.title, 
-		keywords: __filterKeywords(res.compoundContent['keywords'].keywords)
-	}
-	console.log('linkDATA!!!!', linkData);
-	var newLinkSave = new SavedLink(linkData);
-  newLinkSave.save().then(err => {
-  	next();
-  });
-}
+  getLinksTest: function(req, res, next) {
+    // SavedLink.find({fbID: '3609663193669'})
+    // .exec(function(err, data) {
+    //   if (err) {
+    //     console.log(err);
+    //   }
+    //   if (data) {
+    //     console.log('found link data', data);
+    //     res.compoundContent = res.compoundContent || {};
+    //     res.compoundContent['link'] = data;
+    //     next();
+    //   }
+    // });
+    
+  }
+};

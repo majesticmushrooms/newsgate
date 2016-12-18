@@ -1,0 +1,58 @@
+<!-- Basic View Starter -->
+<div>
+  <div>{{starter}}</div>
+  <div>you have {{linksNum}} links saved</div>
+</div>
+
+<br>
+<br>
+
+<div ng-click='showKeywords()'>Keywords</div>
+<div ng-click='showLinks()'>All Links</div>
+
+<br>
+<br>
+
+  <div ng-class='keywordsTab' ng-show='showkeyword'>
+    <h3>Here are your top 8 keywords</h3>
+    <div ng-class='showKeywords'>
+      <div ng-repeat='word in keywords | limitTo:8 track by $index'>
+      <!-- <div ng-repeat='word in keywords | limitTo:8 track by $index'> -->
+        <div ng-click="filterByKeyword(keywords[$index])">
+        {{word.text}}
+        </div>
+      </div>
+      <div>...</div>
+      <br>
+      <h3>Search For Your Links by keywords</h3>
+      <input type="search" ng-model="search.text" 
+      placeholder="filter by keywords" />
+      <div ng-class='allKeyWords' ng-show='search.text.length > 2'> 
+        <div ng-repeat='word in keywords | filter:search track by $index'>
+          <div ng-click="filterByKeyword(keywords[$index])">
+          {{word.text}}
+          </div>
+        </div>
+        <br>
+      </div>
+    </div>
+
+    <br>
+    <br>
+
+    <div ng-class='filteredLinks' ng-show='showfiltered'>
+      <div ng-repeat='link in filteredLinks track by $index'>
+        <div>{{link.title}}</div>
+        <div ng-click="goToLink(filteredLinks[$index].url);">{{link.url}}</div>
+      </div>
+    </div>
+  </div>
+
+
+  <div ng-class='showLinks' ng-show='showlink'>
+    <div>Here are all your links</div>
+    <div ng-repeat='link in links'>
+      <div>{{link.title}}</div>
+      <div>{{link.url}}</div>
+    </div>
+  </div>

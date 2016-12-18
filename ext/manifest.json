@@ -9,25 +9,27 @@
 		"default_icon": "icon.png",
 		"default_popup": "popup.html"
 	},
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+
+  },
 	"permissions": [
 		"activeTab",
-		"https://ajax.googleapis.com/"
+		"https://ajax.googleapis.com/",
+    "storage"
 	],
 	"content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'",
 	"content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
-      "css": ["bootstrap.min.css"],
+      "css": ["bootstrap.min.css", "contentScript.css"],
       "js": ["jquery.min.js", "bootstrap.min.js", "contentScript.js"]
     }
+  ],
+  "web_accessible_resources": [
+    "contentScriptAssets/spin.gif",
+    "contentScriptAssets/donkey.gif",
+    "contentScriptAssets/elephant.gif"
   ]
 }
-
-	// "background":
- //    {
- //        "scripts": ["jquery.min.js"]
- //    },
-	// "content_scripts": [{
-	// 	"js": ["jquery.min.js", "popup.js"],
-	// 	"matches": [ "http://*/*", "https://*/*"]
-	// }]

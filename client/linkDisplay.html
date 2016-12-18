@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="link">
+  <head>
+    <meta charset="utf-8">
+    <title>NewsGate Link</title>
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="styles/style.css" />
+    <script src="lib/underscore/underscore.js"></script>
+    <script src="lib/jquery/dist/jquery.js"></script>
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular-route/angular-route.js"></script>
+    <!-- <base href="/" /> -->
+  </head>
+  <body>
+    <script src="app/link/linkController.js"></script>
+    <script src="app/link/linkServices.js"></script>
+    <script src="app/appLink.js"></script>
+    <script src="app/link/facebook.js"></script>
+
+
+    <div>
+        <div class="centerHeader">
+        Link Library
+        </div>
+        <div ng-view>
+        </div>
+
+    </div>
+
+  </body>
+</html>

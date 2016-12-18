@@ -1,9 +1,9 @@
-<!doctype html>
 <!--
  This page is shown when the extension button is clicked, because the
  "browser_action" field in manifest.json contains the "default_popup" key with
  value "popup.html".
  -->
+<!-- <!doctype html>
 <html>
   <head>
     <title>Getting Started Extension's Popup</title>
@@ -13,27 +13,81 @@
         font-size: 100%;
       }
       #status {
-        /* avoid an excessively wide status text */
         white-space: pre;
         text-overflow: ellipsis;
         overflow: hidden;
         max-width: 400px;
       }
     </style>
-
-    <!--
-      - JavaScript and HTML must be in separate files: see our Content Security
-      - Policy documentation[1] for details and explanation.
-      -
-      - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
-     -->  
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
      <script src="popup.js"></script>
-  
-  </head>
-  <body>
+
+  </head> -->
+ <!--  <body>
     <div id="status"></div>
     <img id="image-result" hidden>
   </body>
+</html> -->
+<!doctype html>
+<html>
+  <head>
+  <style>
+    body {
+      font-family: 'Adamina', sans-serif;
+      font-size: 11pt;
+      margin: 0;
+      padding: 0;
+      color: #000000;
+      border: 2px solid  #000000;
+      background:  yellow;
+      /*color: #06477D;*/
+      /*border: 2px solid #06477D;*/
+/*      color: #fff1bf;
+      border: 2px solid  #fff1bf;*/
+      border-radius: 4px;
+    }
+
+    ul {
+      list-style-type: none;
+      cursor: pointer;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      text-align: center;
+      padding: 5px 20px;
+    }
+
+    li:hover {
+      /*background: #06477D;*/
+      background:  #000000;
+      color: white;
+    }
+
+  </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="bootstrap.min.css" />
+    <script src="bootstrap.min.js"></script>
+    <script src="popup.js"></script>
+    <script src="facebook.js"></script>
+  <body>
+<html>
+<body>
+    <ul id="list">
+        <li id="SaveLink">Save Link</li>
+        <li id="ViewLinks">View Links</li>
+        <li id="ViewReport">Report Card</li>
+        <li id="login">Login To Facebook</li>
+        <li hidden id="logout">Logout of Facebook</li>
+    </ul>
+    <!-- <div id="facebook"> -->
+    <!-- <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button> -->
+    <!-- <div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false"
+    data-auto-logout-link="true" onlogin="checkLoginState();"></div>
+    <div id="status">
+    </div>
+</div> -->
+</body>
 </html>
 

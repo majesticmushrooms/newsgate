@@ -1,0 +1,45 @@
+.popover {
+  border: 2px solid #06477D;
+  color: #06477D;
+}
+
+.popover-title {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.popover-content {
+  color: #06477D;
+}
+
+.popoverTitles {
+  font-weight: bold;
+}
+
+.heart {
+  color: fuchsia;
+  font-size: 22px;
+  margin: auto 3px auto 3px;
+}
+
+.heart:hover {
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.viewReportCard:hover {
+  cursor: pointer;
+}
+
+.gifLeaning {
+  height: 20px; 
+  width: auto;
+}
+
+.gifLoading {
+  height: 40%;
+  width: 40%;
+  display: block;
+  margin: 0 auto;
+}

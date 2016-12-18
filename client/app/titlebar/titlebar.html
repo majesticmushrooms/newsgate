@@ -1,16 +1,49 @@
 <div id="titlebarContainer" ng-controller="TitlebarController">
-  <!-- <div class="centerGeneric">LOADED TITLEBAR COMPONENT</div> -->
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <div class="titlebarTitle" class="centerGeneric">{{title}}</div>
-      <div class="alert alert-success" role="alert" ng-hide="fake">
-        <span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true"></span>
-        This domain is not on our blacklist. Use the report button if you think it should be.
-      </div>
-      <div class="alert alert-danger" role="alert" ng-hide="{{!fake}}">
-        <span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"></span>
-        This article is from a domain on our blacklist. It may contain biased or falsified content.
-      </div>
-    </div>
+
+
+  <div class="reportcard">
+
+
+    <!-- <table class="table table-hover" id="innercard"> -->
+  <div id="innercard">
+    <div><h1 class="mainheader"><b>ARTICLE REPORT CARD</b></h1></div>
+    <div><h3 class="headers title">{{title}}</h3></div>
   </div>
+  <div class="divTable" style="width: 75%; border: 1px solid #000;">
+  <div class="divTableBody">
+  <div class="divTableRow">
+    <div class="divTableCell">Metric</div>
+    <div class="divTableCell">Rating</div>
+    <div class="divTableCell">Grade</div>
+  </div>
+  <div class="divTableRow" ng-controller="TitlebarController">
+    <div class="divTableCell">Blacklist</div>
+    <div class="divTableCell" ng-show="{{!fake}}">No</div>
+    <div class="divTableCell" ng-show="{{!fake}}">A+</div>
+    <div class="divTableCell" ng-show="fake">Yes</div>
+    <div class="divTableCell" ng-show="fake">F-</div>
+  </div>
+  <div class="divTableRow"  ng-controller="ReportCardController">
+    <div class="divTableCell">Bias</div>
+    <div class="divTableCell">{{bias}}</div>
+
+    <div class="divTableCell" ng-show="lean=='left'"><span class="fa fa-star left" aria-hidden="true" ng-cloak></span></div>
+    <div class="divTableCell" ng-show="lean=='right'"><span class="fa fa-star right" aria-hidden="true" ng-cloak></span></div>
+    <div class="divTableCell" ng-show="lean=='center'"><span class="fa fa-star center" aria-hidden="true" ng-cloak></span></div>
+  </div>
+  <div class="divTableRow" ng-controller="ReportCardController">
+    <div class="divTableCell">Emotion</div>
+    <div class="divTableCell">{{emotions}}</div>
+    <div class="divTableCell"><span class="fa fa-check positive" aria-hidden="true"></span></div>
+  </div>
+  <div class="divTableRow" ng-controller="ReportCardController">
+    <div class="divTableCell">Sentiment</div>
+    <div class="divTableCell">{{sentiment}}</div>
+    <div class="divTableCell"><span class="fa fa-smile-o happy" aria-hidden="true"></span>
+  </div>
+  </div>
+  </div>
+
+</div>
+</div>
 </div>

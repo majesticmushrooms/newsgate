@@ -7,7 +7,8 @@ angular.module('newsgate', [
   'newsgate.bubble',
   'newsgate.tweets',
   'newsgate.nav',
-  'newsgate.bias',
+  'newsgate.reportcard',
+  // 'newsgate.link',
   'ngRoute'
 ])
 .config(function($routeProvider) {
@@ -29,12 +30,11 @@ angular.module('newsgate', [
   .when('/tweets', {
     templateUrl : 'app/tweets/tweets.html',
     controller: 'TweetsController'
-  })
-  .when('/bias', {
-    templateUrl : 'app/bias/bias.html',
-    controller: 'BiasController'
   });
-
+  // .when('/bias', {
+  //   templateUrl : 'app/bias/bias.html',
+  //   controller: 'BiasController'
+  // });
 })
 .run(['$anchorScroll', function($anchorScroll) {
   $anchorScroll.yOffset = 50;

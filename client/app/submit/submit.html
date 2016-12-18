@@ -1,22 +1,11 @@
 <div id="formContainer" ng-controller="SubmitController">
   <form ng-submit="sendLink()">
     <div class="form-group">
-      <!-- <label for="newsLink" class="formNewsLinkHeader">Check News Link</label> -->
-      <div class="input-group">
-        <input type="text" class="form-control" id="newsLink" aria-describedby="newsLinkDescription" placeholder="Enter URL" ng-model="inputLink">
-        <span class="input-group-btn">
-          <button class="btn btn-default" type="submit" class="unselectable">Go!</button>
-        </span>
+      <div id="spinnerContainer" ng-show="hideSpinner">
+        <i id="spinner" class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+        <!-- <span class="grade">Grading your news...</span> -->
+        <br>
       </div>
-
-      <!-- <small id="newsLinkDescription" class="form-text text-muted formNewsLinkDescription">Insert Description Text.</small> -->
-
-      <div ng-include="'app/nav/nav.html'"></div>
-
-      <div id="spinnerContainer" ng-hide="hideSpinner">
-        <img src="assets/hourglass.svg">
-      </div>
-
     </div>
   </form>
 </div>

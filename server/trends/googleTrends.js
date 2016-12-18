@@ -4,13 +4,14 @@ var googleTrends = require('google-trends-api');
 
 
 exports.getGoogleTrends = function(req, res, next) {
-  
+
+
   var top3Keywords = res.compoundContent.keywords.keywords.map(function(word) { return word.text; }).slice(0,3);
   var combinedKeywords = top3Keywords.join(' ');
 
   //If too many words in search query, Google trends will not return resutls
   if (combinedKeywords.split(' ').length > 3) {
-    var searchTerms = top3Keywords; 
+    var searchTerms = top3Keywords;
   } else {
     var searchTerms = [combinedKeywords].concat(top3Keywords);
   }
@@ -20,7 +21,7 @@ exports.getGoogleTrends = function(req, res, next) {
 
   var timePeriod = {
     type: 'day',   //resolution of returned data
-    value: 7       //goes back 7 days
+    value: 5      //goes back 7 days
   }
   googleTrends.trendData({keywords: searchTerms, timePeriod: timePeriod})
   .then(function(data) {

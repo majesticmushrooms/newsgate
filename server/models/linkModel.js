@@ -6,6 +6,8 @@ var keywordSchema = new mongoose.Schema({
 });
 
 var savedLinkSchema = new mongoose.Schema({
+  name: String,
+  fbID: Number,
   url: String,
   title: String,
   keywords: [keywordSchema]
