@@ -12,16 +12,16 @@
   <div class="divTable" style="width: 75%; border: 1px solid #000;">
   <div class="divTableBody">
   <div class="divTableRow">
-    <div class="divTableCell">Metric</div>
-    <div class="divTableCell">Rating</div>
-    <div class="divTableCell">Grade</div>
+    <div class="divTableCell"><b>Metric</b></div>
+    <div class="divTableCell"><b>Rating</b></div>
+    <div class="divTableCell"><b>Grade</b></div>
   </div>
   <div class="divTableRow" ng-controller="TitlebarController">
     <div class="divTableCell">Blacklist</div>
     <div class="divTableCell" ng-show="{{!fake}}">No</div>
-    <div class="divTableCell grade" ng-show="{{!fake}}">A+</div>
+    <div class="divTableCell grade" ng-show="{{!fake}}"><b>A+</b></div>
     <div class="divTableCell" ng-show="fake">Yes</div>
-    <div class="divTableCell grade" ng-show="fake">F-</div>
+    <div class="divTableCell grade" ng-show="fake"><b>F-</b></div>
   </div>
   <div class="divTableRow"  ng-controller="ReportCardController">
     <div class="divTableCell">Bias</div>
@@ -40,17 +40,21 @@
   <div class="divTableRow" ng-controller="ReportCardController">
     <div class="divTableCell">Sentiment</div>
     <div class="divTableCell">{{sentiment}}</div>
-    <div class="divTableCell" ng-show="sentiment=='negative'"><span class="fa fa-frown-o" aria-hidden="true"></span></div>
-    <div class="divTableCell" ng-show="sentiment=='positive'"><span class="fa fa-smile-o happy" aria-hidden="true"></span></div>
+    <div class="divTableCell" ng-controller="ReportCardController" ng-show="sentiment=='negative'"><span class="fa fa-frown-o" aria-hidden="true"></span></div>
+    <div class="divTableCell" ng-controller="ReportCardController" ng-show="sentiment=='positive'"><span class="fa fa-smile-o happy" aria-hidden="true"></span></div>
   </div>
-<!-- <div class="divTableRow" ng-controller="ReportCardController"><div ng-include="'/app/bubble/bubble.html'"></div></div> -->
   </div>
 
 
 
 </div>
+<center><h3>Top Keywords</h3></center><br>
 <div ng-include="'/app/bubble/bubble.html'"></div>
+<center><h3>Weekly Trend Status of Top Keyword</h3></center><br>
+<center><div ng-include="'/app/trends/trends.html'"></div></center>
+<center><h3>Top Related Tweets</h3></center>
 <div ng-include="'/app/tweets/tweets.html'"></div>
+
 
 </div>
 </div>

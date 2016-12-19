@@ -18,7 +18,7 @@ angular.module('newsgate.trends', [])
     scope: { data: '=' }, // isolate scope. essentially removes the two way data binding
     replace: true,
     link: function(scope, element) {
-      var title = scope.$parent.title;
+      var title = scope.$parent.title.toUpperCase();
 
       console.log(scope.x);
       var dates = {};
@@ -43,30 +43,27 @@ angular.module('newsgate.trends', [])
 
 
       var ctx = document.getElementById('myChart').getContext('2d');
-      ctx.canvas.width = 300;
+      ctx.canvas.width = 450;
       ctx.canvas.height = 300;
       var myChart = new Chart(ctx, {
         type: 'line',
-        labelFontSize: 20,
         data: {
           labels: labelDate,
           datasets: [{
             label: title,
-            labelFontSize: 20,
             data: labelValue,
-            backgroundColor: "rgba(160,160,160,0.4)"
+            backgroundColor: "rgba(255,241,191,0.4)"
           }]
         },
         options: {
-          resposive: true,
-          scales: {
-            yAxes: [{
-                ticks: {
-                fontSize: 20,
-                max: 300
-              }
-            }]
-          }
+          resposive: true
+          // scales: {
+          //   yAxes: [{
+          //       ticks: {
+          //       max: 300
+          //     }
+          //   }]
+          // }
         }
       });
     }

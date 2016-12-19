@@ -44,15 +44,15 @@ angular.module('newsgate.services', [])
       State.hideNav = false;
 
       // work around for googleTrends to use hardcoded data
-      if (true) {
-        if (toggle) {
-          Data.google = dataSet1;
-          toggle = false;
-        } else {
-          Data.google = dataSet2;
-          toggle = true;
-        }
-      }
+      // if (true) {
+      //   if (toggle) {
+      //     Data.google = dataSet1;
+      //     toggle = false;
+      //   } else {
+      //     Data.google = dataSet2;
+      //     toggle = true;
+      //   }
+      // }
       State.hideSpinner = false;
 
 
@@ -92,7 +92,7 @@ angular.module('newsgate.services', [])
       //     console.log('retrieved storage--->', JSON.parse(result));
       //   });
       // })
-    }) 
+    })
   }
 
   var loginFB = function () {
@@ -105,7 +105,7 @@ angular.module('newsgate.services', [])
 
   return {
     sendLink: sendLink,
-    saveLink: saveLink, 
+    saveLink: saveLink,
     loginFB: loginFB
   };
 })

@@ -13,6 +13,6 @@ angular.module('newsgate.bubble', [])
   return {
     restrict: 'E',
     scope: { data: '='},
-    template: "<span ng-repeat='keywords in data | limitTo:7'>{{keywords.text}}&nbsp</span>"
+    template: "<div ng-repeat='keywords in data | limitTo:5'><center><b>{{keywords.text.toUpperCase()}}</b></center>&nbsp</div>"
     };
 });

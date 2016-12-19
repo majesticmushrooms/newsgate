@@ -36,7 +36,7 @@
   width: 75%;
   margin: auto;
   border: black;
-  border-style: double;
+  border-style: solid;
   margin-bottom: 25px;
 }
 
@@ -46,14 +46,14 @@
 
 .reportcard {
   border-color: black;
-  border-style: double;
+  border-style: solid;
   width: 75%;
   margin: auto;
   background-color: #FFEDB0;
 }
 
 .mainheader {
-  font-family: 'Adamina', sans-serif;
+  /*font-family: 'Adamina', sans-serif;*/
   text-align: center;
   margin: 0;
   background: black;
@@ -62,12 +62,12 @@
 }
 
 html {
-  font-family: 'Raleway', sans-serif;
+  /*font-family: 'Raleway', sans-serif;*/
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%; }
 
 body {
-  font-family: 'Raleway', sans-serif;
+  /*font-family: 'Raleway', sans-serif;*/
   margin: 0; }
 
 article,

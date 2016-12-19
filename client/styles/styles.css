@@ -12,12 +12,10 @@
 }
 
 .headers {
-  font-family: 'Adamina', sans-serif;
   text-align: center;
 }
 
 .mainheader{
-  font-family: 'Adamina', sans-serif;
   text-align: center;
   margin: 0;
   background: black;
@@ -52,7 +50,7 @@
 }
 
 .divTableCell, .divTableHead {
-	border: 1px double #000;
+	border: 1px solid #000;
 	display: table-cell;
 	padding: 3px 10px;
 }
@@ -94,7 +92,7 @@
 
 .reportcard {
   border-color: #000 ;
-  border-style: double;
+  border-style: solid;
   width: 75%;
   margin: auto;
   background-color: #fff1bf;
@@ -230,10 +228,7 @@
 }
 
 #mainApp {
-  width: 85%;
   margin: 0 auto;
-  background: #fff1bf;
-  border: 3px double navy;
 }
 
 #topborder {
