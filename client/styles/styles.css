@@ -288,6 +288,10 @@ b.ng-binding {
   box-shadow: 1px 1px 5px rgb(70,70,70)
 }
 
+b.ng-binding:hover {
+  cursor: pointer;
+}
+
 .topKeywords, .topKeyword, .relatedTweets {
   margin: 20px auto;
   width: 75%;

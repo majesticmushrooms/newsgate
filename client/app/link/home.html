@@ -48,17 +48,17 @@
     </div>
   </div>
 
-
   <div ng-class='showLinks' ng-show='showlink'>
-    <div>All Saved Links</div>
+    <div><center>All Saved Links</center></div><br>
 
-    <center><input class="search" type="search" ng-model="search.title" ng-change='search.keyword = search.title; search.url = search.title' placeholder="search links by title or keyword or url" /></center>
+    <center><input class="search" type="search" ng-model="search.title" ng-change='search.keyword = search.title; search.url = search.title' placeholder="search links by title or keyword or url" /></center><br>
     <div class="bottomlinks" ng-repeat='link in links | filter:searchFunc'>
 
-<div class="col-md-6">
+<div >
       <center><a href="http://{{link.url}}" target="_blank"><div>{{link.title}}</div></a></center>
 
 </div>
+
     </div>
   </div>
 
